@@ -1,0 +1,83 @@
+Category: Calc
+Course Number: 53800
+  MWF 8:00am-9:00am
+  TTH 2:30pm-3:30pm
+
+Category: Calc
+Course Number: 53765
+  MWF 8:00am-9:00am
+  TTH 1:00pm-2:00pm
+
+Category: Calc
+Course Number: 53770
+  MWF 8:00am-9:00am
+  TTH 4:00pm-5:00pm
+
+Category: Calc
+Course Number: 53835
+  MWF 1:00pm-2:00pm
+  TTH 1:00pm-2:00pm
+
+Category: Calc
+Course Number: 53840
+  MWF 1:00pm-2:00pm
+  TTH 4:00pm-5:00pm
+
+Category: Calc
+Course Number: 53845
+  MWF 2:00pm-3:00pm
+  TTH 2:00pm-3:00pm
+
+Category: Calc
+Course Number: 53850
+  MWF 2:00pm-3:00pm
+  TTH 4:00pm-5:00pm
+
+Category: UGS
+Course Number: 62425
+  TTH 11:00am-12:30pm
+  F 1:00pm-2:00pm
+
+Category: UGS
+Course Number: 62395
+  TTH 11:00am-12:30pm
+  F 9:00am-10:00am
+
+Category: UGS
+Course Number: 61825
+  TTH 3:30pm-5:00pm
+  TH 10:00am-11:00am
+
+Category: UGS
+Course Number: 61830
+  TTH 3:30pm-5:00pm
+  F 10:00am-11:00am
+
+Category: UGS
+Course Number: 61820
+  TTH 3:30pm-5:00pm
+  F 9:00am-10:00am
+
+Category: UGS
+Course Number: 61645
+  TTH 2:00pm-3:30pm
+
+Category: UGS
+Course Number: 62540
+  MW 1:00pm-2:00pm
+  F 2:00pm-3:00pm
+
+Category: UGS
+Course Number: 62545
+  MW 1:00pm-2:00pm
+  F 3:00pm-4:00pm
+
+Category: SDS
+Course Number: 57615
+  MW 11:00am-12:30pm
+  T 12:00pm-1:00pm
+
+Category: SDS
+Course Number: 57635
+  TTH 12:30pm-2:00pm
+  TH 4:00pm-5:00pm
