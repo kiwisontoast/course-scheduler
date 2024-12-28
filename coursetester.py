@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 import sv_ttk
 from tkinter import messagebox
+import pyperclip as pc
+
 
 class TimeSlot:
     def __init__(self, days, start_time, end_time):
@@ -15,6 +17,7 @@ class TimeSlot:
                 if not (self.end_time <= other.start_time or self.start_time >= other.end_time):
                     return True
         return False
+
 
 class Course:
     def __init__(self, course_number):
@@ -30,6 +33,7 @@ class Course:
                 if my_slot.has_time_conflict(other_slot):
                     return True
         return False
+
 
 class CourseRegistration:
     def __init__(self, root):
@@ -50,12 +54,16 @@ class CourseRegistration:
                 for course in self.courses[category]:
                     if not self.has_conflict_with_schedule(course):
                         time_slots_str = "\n".join(
-                            f"  {time_slot.days} {format_time(time_slot.start_time)}-{format_time(time_slot.end_time)}"
+                            f" {time_slot.days} {format_time(
+                                time_slot.start_time)}-{format_time(time_slot.end_time)}"
                             for time_slot in course.time_slots
                         )
+                        # Copy course number to clipboard
+                        pc.copy(course.course_number)
                         response = messagebox.askyesnocancel(
                             f"Accept {category} Course",
-                            f"Accept course {course.course_number} in {category}?\n{time_slots_str}",
+                            f"Accept course {course.course_number} in {
+                                category}?\n{time_slots_str}",
                             default=messagebox.YES
                         )
                         if response is None:
@@ -65,10 +73,7 @@ class CourseRegistration:
                             break
                         else:
                             continue
-
         self.display_schedule()
-
-
 
     def has_conflict_with_schedule(self, course):
         for scheduled_course in self.schedule:
@@ -78,10 +83,12 @@ class CourseRegistration:
 
     def display_schedule(self):
         self.schedule_text.delete(1.0, tk.END)
+        self.schedule_text.insert(tk.END, f"Courses Registered:\n")
         for course in self.schedule:
-            self.schedule_text.insert(tk.END, f"Course {course.course_number}:\n")
-            for time_slot in course.time_slots:
-                self.schedule_text.insert(tk.END, f"  {time_slot.days} {format_time(time_slot.start_time)}-{format_time(time_slot.end_time)}\n")
+            for category, courses in self.courses.items():
+                if course in courses:
+                    self.schedule_text.insert(tk.END, f"{category} course {
+                                              course.course_number}\n")
 
     def clear_entries(self):
         self.category_entry.delete(0, tk.END)
@@ -104,19 +111,25 @@ class CourseRegistration:
         self.course_number_entry = ttk.Entry(self.frame)
         self.course_number_entry.grid(row=1, column=1, sticky=(tk.W, tk.E))
 
-        self.days_label = ttk.Label(self.frame, text="Days and Times (e.g., MWF, 8:00am-9:00am, TTH, 1:00pm-2:00pm):")
-        self.days_label.grid(row=2, column=0, columnspan=2, padx=(0, 10))
+        self.days_label = ttk.Label(
+            self.frame, text="Days and Times (e.g., MWF, 8:00am-9:00am, TTH, 1:00pm-2:00pm):")
+        self.days_label.grid(row=2, column=0, columnspan=2,
+                             padx=(0, 10), pady=(10, 10))
         self.days_entry = ttk.Entry(self.frame)
-        self.days_entry.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E))
+        self.days_entry.grid(
+            row=3, column=0, columnspan=2, sticky=(tk.W, tk.E))
 
-        self.add_button = ttk.Button(self.frame, text="Add Course", command=self.add_course)
+        self.add_button = ttk.Button(
+            self.frame, text="Add Course", command=self.add_course)
         self.add_button.grid(row=4, column=0, columnspan=2, pady=(10, 0))
 
-        self.generate_button = ttk.Button(self.frame, text="Generate Schedule", command=self.generate_schedule)
-        self.generate_button.grid(row=5, column=0, columnspan=2, pady=(10, 0))
+        self.generate_button = ttk.Button(
+            self.frame, text="Generate Schedule", command=self.generate_schedule)
+        self.generate_button.grid(row=5, column=0, columnspan=2, pady=(10, 10))
 
         self.schedule_text = tk.Text(self.frame, height=10)
-        self.schedule_text.grid(row=6, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
+        self.schedule_text.grid(
+            row=6, column=0, columnspan=2, sticky=(tk.W, tk.E, tk.N, tk.S))
 
     def add_course(self):
         category = self.category_entry.get()
@@ -146,7 +159,8 @@ class CourseRegistration:
             file.write(f"Category: {category}\n")
             file.write(f"Course Number: {course_number}\n")
             for time_slot in course.time_slots:
-                file.write(f"  {time_slot.days} {format_time(time_slot.start_time)}-{format_time(time_slot.end_time)}\n")
+                file.write(f"  {time_slot.days} {format_time(
+                    time_slot.start_time)}-{format_time(time_slot.end_time)}\n")
             file.write("\n")
 
         self.clear_entries()
@@ -178,6 +192,7 @@ class CourseRegistration:
         except FileNotFoundError:
             pass
 
+
 def __init__(self, root):
     self.root = root
     self.courses = {}
@@ -185,9 +200,9 @@ def __init__(self, root):
     self.load_courses_from_file()
     self.create_ui()
 
-
     # Prompt for additional courses
-    response = messagebox.askyesnocancel("Add Another Course", "Add another course in the same category?", default=messagebox.YES)
+    response = messagebox.askyesnocancel(
+        "Add Another Course", "Add another course in the same category?", default=messagebox.YES)
     if response is None:
         return
     elif response:
@@ -195,9 +210,6 @@ def __init__(self, root):
     else:
         self.category_entry.delete(0, tk.END)
         self.category_entry.focus_set()
-
-
-
 
 
 def convert_time_to_float(time_str):
@@ -216,6 +228,7 @@ def convert_time_to_float(time_str):
         raise ValueError("Invalid time format. Use AM/PM.")
     return hour + minute / 60
 
+
 def format_time(time_float):
     hour = int(time_float)
     minute = int((time_float % 1) * 60)
@@ -226,12 +239,14 @@ def format_time(time_float):
         hour -= 12
     return f"{hour}:{minute:02d}{am_pm}"
 
+
 def main():
     root = tk.Tk()
     root.title("Course Registration")
     sv_ttk.set_theme("dark")
     app = CourseRegistration(root)
     root.mainloop()
+
 
 if __name__ == "__main__":
     main()
