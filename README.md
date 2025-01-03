@@ -1,5 +1,5 @@
 # Course Scheduler
-The Course Registration System is a user-friendly application designed to manage and schedule courses. It allows users to add courses with specific time slots and categories, ensuring that there are no conflicts in the schedule.
+The Course Scheduler is a user-friendly application designed to manage and schedule courses. It allows users to add courses with specific time slots and categories, ensuring that there are no conflicts in the schedule.
 THIS PROGRAM WAS MADE SPECIFICALLY TO WORK WITH THE SCHEDULING PROGRAM OF THE UNIVERSITY OF TEXAS AT AUSTIN (MAY OR MAY NOT WORK WITH YOUR OWN UNIVERSITY PROGRAM)
 
 ## Key Features
